@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+class Notice_model extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -19,16 +19,17 @@ class Welcome extends CI_Controller {
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
 	public function __construct(){
-        parent:: __construct();
-        $this->load->helper('url');
-        $this->load->helper('html');
+        $this->load->database();
     }
     
-    public function index()
-	{
-		$data['title'] = 'Welcome to the school';
-        $this->load->view('templates/header', $data);
-        $this->load->view('welcome_message');
-        $this->load->view('templates/footer');
-	}
+    public function get_notice($slug = FALSE){
+        if ($slug === FALSE)
+        {
+                $query = $this->db->get('notice');
+                return $query->result_array();
+        }
+
+        $query = $this->db->get_where('notice', array('slug' => $slug));
+        return $query->row_array();
+    }
 }
