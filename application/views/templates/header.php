@@ -34,7 +34,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.deep_purple-pink.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css">
-    <script src="<?php echo base_url(); ?>assets/js/script.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/scripts.js"></script>
     <style>
     #view-source {
       position: fixed;
