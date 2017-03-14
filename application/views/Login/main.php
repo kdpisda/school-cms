@@ -78,7 +78,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                 <input class="mdl-textfield__input" type="text" id="Last Name" name="lastName" required>
                                 <label class="mdl-textfield__label" for="Last Name">Last Name</label>
                             </div>
-                            <br>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="email" id="Email" name="email" required>
+                                <label class="mdl-textfield__label" for="Email">Email</label>
+                            </div>
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                 <input class="mdl-textfield__input" type="date" id="DOB" name="DOB" required>
                                 <label class="mdl-textfield__label" for="DOB">DOB</label>

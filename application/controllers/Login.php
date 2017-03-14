@@ -34,6 +34,10 @@ class Login extends CI_Controller {
 
         $this->form_validation->set_rules('username', 'Username', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required');
+        
+        if(isset($this->session->username) && $this->session->username != null){
+            header('Location: '.base_url().'dashboard');
+        }
 
         if ($this->form_validation->run() === FALSE){
             $data['msg'] = $this->session->flashdata('msg');
@@ -68,7 +72,7 @@ class Login extends CI_Controller {
             }
             else{
                 $this->session->set_flashdata('msg', 'Wrong combination!!!');
-                header('Location:'.base_url().'login');
+                header('Location: '.base_url().'login');
             }
         }
     }
@@ -88,9 +92,9 @@ class Login extends CI_Controller {
 
         }
         else{
-            echo 
             $this->user_model->set_user();
-            $this->load->view('Login/success');
+            $this->session->set_flashdata('msg', 'Wrong combination!!!');
+            header('Location: '.base_url().'login');
         }
     }
 }

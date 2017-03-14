@@ -85,103 +85,21 @@
   <main class="mdl-layout__content">
     <div class="page-content">
       <div class="mdl-grid">
-        <div class="mdl-cell mdl-cell--2-offset-desktop mdl-cell--3-col-desktop">
-          <div class="demo-card-square mdl-card mdl-shadow--2dp">
-                <div class="mdl-card__title mdl-card--expand" style="background: url('https://s-media-cache-ak0.pinimg.com/avatars/shalupisda_1471721118_280.jpg') center / cover;">
-                    <h2 class="mdl-card__title-text">Update</h2>
-                </div>
-                <div class="mdl-card__supporting-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Aenan convallis.
-                </div>
-                <div class="mdl-card__actions mdl-card--border">
-                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                    View Updates
-                    </a>
-                </div>
-          </div>
-        </div>
-        <div class="mdl-cell mdl-cell--3-col-desktop">
-          <div class="demo-card-square mdl-card mdl-shadow--2dp">
-                <div class="mdl-card__title mdl-card--expand" style="background: url('https://s-media-cache-ak0.pinimg.com/avatars/shalupisda_1471721118_280.jpg') center / cover;">
-                    <h2 class="mdl-card__title-text">Update</h2>
-                </div>
-                <div class="mdl-card__supporting-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Aenan convallis.
-                </div>
-                <div class="mdl-card__actions mdl-card--border">
-                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                    View Updates
-                    </a>
-                </div>
-          </div>
-        </div>
-        <div class="mdl-cell mdl-cell--3-col-desktop">
-          <div class="demo-card-square mdl-card mdl-shadow--2dp">
-                <div class="mdl-card__title mdl-card--expand" style="background: url('https://s-media-cache-ak0.pinimg.com/avatars/shalupisda_1471721118_280.jpg') center / cover;">
-                    <h2 class="mdl-card__title-text">Update</h2>
-                </div>
-                <div class="mdl-card__supporting-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Aenan convallis.
-                </div>
-                <div class="mdl-card__actions mdl-card--border">
-                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                    View Updates
-                    </a>
-                </div>
-          </div>
-        </div>
-      </div>
-      <div class="mdl-grid">
-        <div class="mdl-cell mdl-cell--2-offset-desktop mdl-cell--3-col-desktop">
-          <div class="demo-card-square mdl-card mdl-shadow--2dp">
-                <div class="mdl-card__title mdl-card--expand" style="background: url('https://s-media-cache-ak0.pinimg.com/avatars/shalupisda_1471721118_280.jpg') center / cover;">
-                    <h2 class="mdl-card__title-text">Update</h2>
-                </div>
-                <div class="mdl-card__supporting-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Aenan convallis.
-                </div>
-                <div class="mdl-card__actions mdl-card--border">
-                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                    View Updates
-                    </a>
-                </div>
-          </div>
-        </div>
-        <div class="mdl-cell mdl-cell--3-col-desktop">
-          <div class="demo-card-square mdl-card mdl-shadow--2dp">
-                <div class="mdl-card__title mdl-card--expand" style="background: url('https://s-media-cache-ak0.pinimg.com/avatars/shalupisda_1471721118_280.jpg') center / cover;">
-                    <h2 class="mdl-card__title-text">Update</h2>
-                </div>
-                <div class="mdl-card__supporting-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Aenan convallis.
-                </div>
-                <div class="mdl-card__actions mdl-card--border">
-                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                    View Updates
-                    </a>
-                </div>
-          </div>
-        </div>
-        <div class="mdl-cell mdl-cell--3-col-desktop">
-          <div class="demo-card-square mdl-card mdl-shadow--2dp">
-                <div class="mdl-card__title mdl-card--expand" style="background: url('https://s-media-cache-ak0.pinimg.com/avatars/shalupisda_1471721118_280.jpg') center / cover;">
-                    <h2 class="mdl-card__title-text">Update</h2>
-                </div>
-                <div class="mdl-card__supporting-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Aenan convallis.
-                </div>
-                <div class="mdl-card__actions mdl-card--border">
-                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                    View Updates
-                    </a>
-                </div>
-          </div>
+        <div class="mdl-cell mdl-cell--2-offset-desktop mdl-cell--8-col-desktop">
+            <?php echo form_open('gallery/upload'); ?>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="name" name="title" required>
+                <label class="mdl-textfield__label" for="name">Title</label>
+            </div>
+            <br>
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <textarea class="mdl-textfield__input" type="text" rows= "3" id="sample5" name="detail" required></textarea>
+                <label class="mdl-textfield__label" for="detail">Description</label>
+            </div>
+            <br>
+            <input type="file" name="banner" size="20" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">
+            <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast" value="Submit">
+          </form>
         </div>
       </div>
     <footer class="mdl-mega-footer">

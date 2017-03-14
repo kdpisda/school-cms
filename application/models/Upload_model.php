@@ -29,24 +29,17 @@ class User_model extends CI_Model {
         }
     }
     
-    public function set_user()
+    public function set_album()
     {
         $this->load->helper('url');
-        $this->load->library('encrypt');
-        $userName = trim($this->input->post('username'));
-        $passWord = trim($this->input->post('password'));
-        $passWord = $this->encrypt->encode($passWord, md5($userName));
+        $name = trim($this->input->post('name'));
+        $detail = trim($this->input->post('detail'));
         $data = array(
-            'firstname' => trim($this->input->post('firstName')),
-            'lastname' => trim($this->input->post('lastName')),
-            'dob' => $this->input->post('DOB'),
-            'password' => $passWord,
-            'username' => $userName,
-            'email' => trim($this->input->post('email')),
-            'usertype' =>trim($this->input->post('usertype')),
-            'slug' => $userName
+            'name' => $name,
+            'detail' => $detail
         );
 
         return $this->db->insert('users', $data);
     }
+    
 }
