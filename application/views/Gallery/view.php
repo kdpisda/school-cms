@@ -57,7 +57,7 @@
       <nav class="mdl-navigation">
           <?php if(isset($user) && $user != false){ ?>
         <a class="mdl-navigation__link" href="<?php echo base_url(); ?>dashboard"><i class="material-icons">&#xE871;</i> Dashbooard</a>
-        <a class="mdl-navigation__link" href="<?php echo base_url(); ?>upload"><i class="material-icons">&#xE2C6;</i> Upload</a>
+        <a class="mdl-navigation__link" href="<?php echo base_url(); ?>gallery/upload"><i class="material-icons">&#xE2C6;</i> Upload</a>
         <a class="mdl-navigation__link" href=""><i class="material-icons">&#xE8AF;</i> FAQ</a>
         <a class="mdl-navigation__link" href="<?php echo base_url(); ?>dashboard/logout"><i class="material-icons">&#xE154;</i> Logout</a>
             <?php }else {?>
@@ -84,87 +84,50 @@
   </div>
   <main class="mdl-layout__content">
     <div class="page-content">
-      <div class="mdl-grid">
-        <div class="mdl-cell mdl-cell--2-offset-desktop mdl-cell--8-col-desktop">
-            <?php if(isset($error)) echo $error;?>
-            <div id="p1" class="mdl-progress mdl-js-progress"></div>
-            
-            <?php switch($step){
-                case 0: ?>
-            <h5>Two steps to create an album</h5>
-            <ul class="demo-list-icon mdl-list">
-                <li class="mdl-list__item">
-                    <span class="mdl-list__item-primary-content">
-                        <i class="material-icons mdl-list__item-icon">&#xE439;</i>
-                        Upload an image
-                    </span>
-                </li>
-                <li class="mdl-list__item">
-                    <span class="mdl-list__item-primary-content">
-                        <i class="material-icons mdl-list__item-icon">&#xE150;</i>
-                        Set Album name and description
-                    </span>
-                </li>
-                <li class="mdl-list__item">
-                    <span class="mdl-list__item-primary-content">
-                        <i class="material-icons mdl-list__item-icon">&#xE876;</i>
-                        You are done!!!
-                    </span>
-                </li>
-            </ul>
-
-            <?php echo form_open_multipart('upload/do_upload');?>
-                <input type="file" name="userfile" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast" />
-                <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast" value="Upload">
-            </form>
-          <h4>OR</h4>
-          <h5>Done with the above step</h5>
-          <ul class="demo-list-icon mdl-list">
-                <li class="mdl-list__item">
-                    <span class="mdl-list__item-primary-content">
-                        <i class="material-icons mdl-list__item-icon">&#xE439;</i>
-                        Upload an image
-                    </span>
-                </li>
-          </ul>
-          <?php echo form_open_multipart('upload/img_upload');?>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input type="file" name="userfile" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast" />
+        <div class="mdl-grid">
+        <?php if(isset($images) && $images != null){
+            $count = 0;
+            foreach($images as $img_cards):
+            if($count == 0){ ?>
+                <div class="mdl-cell mdl-cell--2-offset-desktop mdl-cell--3-col-desktop">
+                    <div class="demo-card-image mdl-card mdl-shadow--2dp" style="background: url('<?php echo base_url().'assets/uploads/'.$img_cards['img']; ?>') center / cover;">
+                        <div class="mdl-card__title mdl-card--expand"></div>
+                        <div class="mdl-card__actions">
+                            <span class="demo-card-image__filename"><?php echo $img_cards['img']; ?></span>
+                        </div>
+                    </div>
                 </div>
-          <br>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" list="album" id="name" name="album_name" required>
-                    <label class="mdl-textfield__label" for="name">Select Album</label>
-                    <datalist id="album">
-                        <?php if(isset($album) && $album != null){
-                            foreach($album as $option): ?>
-                            <option value="<?php echo $option['name']; ?>">        
-                            <?php endforeach;
-                        } ?>
-                    </datalist>
-                </div>
-          <br>
-                    
-                <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast" value="Upload">
-            </form>
-            <?php $progress = 0; break;
-                case 1: 
-                echo form_open('gallery/upload'); ?>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="text" id="name" name="title" required>
-                    <label class="mdl-textfield__label" for="name">Title</label>
-                </div>
-                <br>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <textarea class="mdl-textfield__input" type="text" rows= "3" id="detail" name="detail" required></textarea>
-                    <label class="mdl-textfield__label" for="detail">Description</label>
-                </div>
-                <br>
-                <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast" value="Submit">
-            </form>
-            <?php $progress = 50; break; 
-            default: $progress = 0; }?>
+        <?php 
+            }
+            elseif($count %3 == 0){ ?>
         </div>
+        <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--2-offset-desktop mdl-cell--3-col-desktop">
+                <div class="demo-card-image mdl-card mdl-shadow--2dp" style="background: url('<?php echo base_url().'assets/uploads/'.$img_cards['img']; ?>') center / cover;">
+                    <div class="mdl-card__title mdl-card--expand"></div>
+                    <div class="mdl-card__actions">
+                        <span class="demo-card-image__filename"><?php echo $img_cards['img']; ?></span>
+                    </div>
+                </div>
+            </div>
+        <?php
+            } else{ ?>
+            <div class="mdl-cell mdl-cell--3-col-desktop">
+                <div class="demo-card-image mdl-card mdl-shadow--2dp" style="background: url('<?php echo base_url().'assets/uploads/'.$img_cards['img']; ?>') center / cover;">
+                <div class="mdl-card__title mdl-card--expand"></div>
+                    <div class="mdl-card__actions">
+                        <span class="demo-card-image__filename"><?php echo $img_cards['img']; ?></span>
+                    </div>
+                </div>
+            </div>
+        <?php    
+            } $count++;
+            endforeach;
+        } 
+        else{ ?>
+            <h5>Sorry No images in this album!!!</h5>
+        <?php }
+            ?>
       </div>
     <footer class="mdl-mega-footer">
   <div class="mdl-mega-footer__middle-section">
@@ -229,8 +192,3 @@
     <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
   </body>
 </html>
-<script>
-    document.querySelector('#p1').addEventListener('mdl-componentupgraded', function() {
-        this.MaterialProgress.setProgress(<?php echo $progress; ?>);
-    });
-</script>

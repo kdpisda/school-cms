@@ -22,6 +22,7 @@ class Gallery_model extends CI_Model {
         $this->load->database();
     }
     
+    // Function to get album names
     public function get_album($slug = FALSE){
         if ($slug === FALSE)
         {
@@ -33,21 +34,24 @@ class Gallery_model extends CI_Model {
         return $query->row_array();
     }
     
+    // Function to add image data in database
     public function upload_img(){
-        $userName = trim($this->input->post('img_name'));
-        $passWord = trim($this->input->post('album'));
-        $passWord = $this->encrypt->encode($passWord, md5($userName));
+        $name = trim($this->input->post('album_name'));
         $data = array(
-            'firstname' => trim($this->input->post('firstName')),
-            'lastname' => trim($this->input->post('lastName')),
-            'dob' => $this->input->post('DOB'),
-            'password' => $passWord,
-            'username' => $userName,
-            'email' => trim($this->input->post('email')),
-            'usertype' =>trim($this->input->post('usertype')),
-            'slug' => $userName
+            'album' => $name,
+            'img' => $this->session->img
         );
-
-        return $this->db->insert('users', $data);
+        $session_data = array('img', 'step');
+        $this->session->unset_userdata($session_data);
+        
+        return $this->db->insert('images', $data);
+    }
+    
+    // Function to return image names on calling a particular album
+    public function get_images($album_name){
+        if(isset($album_name) && $album_name != null){
+            $query = $this->db->get_where('images', array('album' => $album_name));
+            return $query->result_array();
+        }
     }
 }

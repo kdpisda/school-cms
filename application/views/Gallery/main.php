@@ -97,8 +97,8 @@
                     <?php echo $album_item['detail']; ?>
                 </div>
                 <div class="mdl-card__actions mdl-card--border">
-                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                    View Updates
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="<?php echo base_url().'gallery/'.$album_item['name']; ?>" >
+                    View Images
                     </a>
                 </div>
             </div>
@@ -114,8 +114,8 @@
                     <?php echo $album_item['detail']; ?>
                 </div>
                 <div class="mdl-card__actions mdl-card--border">
-                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                    View Updates
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="<?php echo base_url().'gallery/'.$album_item['name']; ?>" >
+                    View Images
                     </a>
                 </div>
             </div>

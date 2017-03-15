@@ -60,6 +60,7 @@ class Gallery extends CI_Controller {
                     else {
                         $data['user'] = false;
                     }           
+                    $data['album'] = $this->gallery_model->get_album();
                     $this->load->view('gallery/upload', $data);
                 }
                 else{
@@ -85,12 +86,7 @@ class Gallery extends CI_Controller {
             $this->session->set_userdata('step', 0);
             $data['step'] = 0;
             $data['title'] = 'Gallery';
-            if(isset($this->session->username) && $this->session->username != null){
-                $data['user'] = true;
-            }
-            else {
-                $data['user'] = false;
-            }
+            $data['album'] = $this->gallery_model->get_album();
             if(isset($this->session->username) && $this->session->username != null){
                 $data['user'] = true;
             }
@@ -99,5 +95,18 @@ class Gallery extends CI_Controller {
             }           
             $this->load->view('Gallery/upload', $data);
         }    
+    }
+    
+    // Function to view a particular album
+    public function view($albumname){
+        if(isset($this->session->username) && $this->session->username != null){
+                $data['user'] = true;
+            }
+            else {
+                $data['user'] = false;
+            }
+        $data['images'] = $this->gallery_model->get_images($albumname);
+        $data['title'] = 'Gallery';
+        $this->load->view('Gallery/view', $data);
     }
 }

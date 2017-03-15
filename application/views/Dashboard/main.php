@@ -108,6 +108,7 @@
           <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">delete</i>Trash</a>
           <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">report</i>Spam</a>
           <a class="mdl-navigation__link" href="<?php echo base_url(); ?>gallery"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation"> &#xE02C;</i>Gallery</a>
+          <a class="mdl-navigation__link" href="<?php echo base_url(); ?>settings"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">&#xE8B8;</i>Settings</a>
           <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">forum</i>Forums</a>
           <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">flag</i>Updates</a>
           <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">local_offer</i>Promos</a>

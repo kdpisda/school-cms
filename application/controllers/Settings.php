@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Upload_model extends CI_Model {
+class Settings extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -19,21 +19,20 @@ class Upload_model extends CI_Model {
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
 	public function __construct(){
-        $this->load->database();
+        parent:: __construct();
+        $this->load->helper('url');
+        $this->load->helper('html');
+        $this->load->library('session');
     }
     
-    public function set_album(){
-
-        $name = trim($this->input->post('title'));
-        $detail = trim($this->input->post('detail'));
-        $data = array(
-            'name' => $name,
-            'detail' => $detail,
-            'banner_img' => $this->session->img
-        );
-        $session_data = array('img', 'step');
-        $this->session->unset_userdata($session_data);
-        return $this->db->insert('album', $data);
-    }
-    
+    public function index(){
+		if(isset($this->session->username) and $this->session->username != null){
+            $data['title'] = 'Settings';
+            $this->load->view('settings/main', $data);
+        }
+        else{
+            $this->session->set_flashdata('msg', 'Please login to change your account information.');
+            header('Location: '.base_url().'login');
+        }
+	}
 }
