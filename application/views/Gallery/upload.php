@@ -86,20 +86,68 @@
     <div class="page-content">
       <div class="mdl-grid">
         <div class="mdl-cell mdl-cell--2-offset-desktop mdl-cell--8-col-desktop">
-            <?php echo form_open('gallery/upload'); ?>
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <input class="mdl-textfield__input" type="text" id="name" name="title" required>
-                <label class="mdl-textfield__label" for="name">Title</label>
-            </div>
-            <br>
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                <textarea class="mdl-textfield__input" type="text" rows= "3" id="sample5" name="detail" required></textarea>
-                <label class="mdl-textfield__label" for="detail">Description</label>
-            </div>
-            <br>
-            <input type="file" name="banner" size="20" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">
-            <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast" value="Submit">
-          </form>
+            <?php if(isset($error)) echo $error;?>
+            <div id="p1" class="mdl-progress mdl-js-progress"></div>
+            
+            <?php switch($step){
+                case 0: ?>
+            <h5>Two steps to create an album</h5>
+            <ul class="demo-list-icon mdl-list">
+                <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+                        <i class="material-icons mdl-list__item-icon">&#xE439;</i>
+                        Upload an image
+                    </span>
+                </li>
+                <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+                        <i class="material-icons mdl-list__item-icon">&#xE150;</i>
+                        Set Album name and description
+                    </span>
+                </li>
+                <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+                        <i class="material-icons mdl-list__item-icon">&#xE876;</i>
+                        You are done!!!
+                    </span>
+                </li>
+            </ul>
+
+            <?php echo form_open_multipart('upload/do_upload');?>
+                <input type="file" name="userfile" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast" />
+                <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast" value="Upload">
+            </form>
+          <h5>OR</h5>
+          <h6>Done with the above step</h6>
+          <ul class="demo-list-icon mdl-list">
+                <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+                        <i class="material-icons mdl-list__item-icon">&#xE439;</i>
+                        Upload an image
+                    </span>
+                </li>
+          </ul>
+          <?php echo form_open_multipart('upload/img_upload');?>
+                <input type="file" name="userfile" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast" />
+                <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast" value="Upload">
+            </form>
+            <?php $progress = 0; break;
+                case 1: 
+                echo form_open('gallery/upload'); ?>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <input class="mdl-textfield__input" type="text" id="name" name="title" required>
+                    <label class="mdl-textfield__label" for="name">Title</label>
+                </div>
+                <br>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                    <textarea class="mdl-textfield__input" type="text" rows= "3" id="detail" name="detail" required></textarea>
+                    <label class="mdl-textfield__label" for="detail">Description</label>
+                </div>
+                <br>
+                <input type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast" value="Submit">
+            </form>
+            <?php $progress = 50; break; 
+            default: $progress = 0; }?>
         </div>
       </div>
     <footer class="mdl-mega-footer">
@@ -165,3 +213,8 @@
     <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
   </body>
 </html>
+<script>
+    document.querySelector('#p1').addEventListener('mdl-componentupgraded', function() {
+        this.MaterialProgress.setProgress(<?php echo $progress; ?>);
+    });
+</script>

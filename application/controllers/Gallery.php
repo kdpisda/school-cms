@@ -22,8 +22,11 @@ class Gallery extends CI_Controller {
         parent:: __construct();
         $this->load->library('form_validation');
         $this->load->helper('url');
+        $this->load->helper('form');
         $this->load->helper('html');
         $this->load->library('session');
+        $this->load->model('upload_model');
+        $this->load->model('gallery_model');
     }
     
     public function index()
@@ -31,44 +34,70 @@ class Gallery extends CI_Controller {
 		$data['title'] = 'Gallery';
         if(isset($this->session->username) && $this->session->username != null){
             $data['user'] = true;
-            $this->load->view('Gallery/main', $data);
         }
         else {
             $data['user'] = false;
-            $this->load->view('Gallery/main', $data);
         }
+        $data['album'] = $this->gallery_model->get_album();
+        $this->load->view('Gallery/main', $data);
 	}
     
     // Function to create album and upload clips
     public function upload(){
-        $this->form_validation->set_rules('name', 'Title', 'required');
-        $this->form_validation->set_rules('detail', 'Detail', 'required');
+        // Checking whether any steps have been initiated or not
+        if(isset($this->session->step) && $this->session->step != null && isset($this->session->img) && $this->session->img !=null){
+            
+            if($this->session->step == 1){
+                $this->form_validation->set_rules('title', 'Title', 'required');
+                $this->form_validation->set_rules('detail', 'Detail', 'required');
 
-        if ($this->form_validation->run() === FALSE){
-            $data['title'] = 'Create an Album';
-            $this->load->view('gallery/upload', $data);
+                if ($this->form_validation->run() === FALSE){
+                    $data['title'] = 'Create an Album';
+                    $data['step'] = $this->session->step;
+                    if(isset($this->session->username) && $this->session->username != null){
+                        $data['user'] = true;
+                    }
+                    else {
+                        $data['user'] = false;
+                    }           
+                    $this->load->view('gallery/upload', $data);
+                }
+                else{
+                    $this->upload_model->set_album();
+                    header('Location: '.base_url().'gallery');
+                }
+            }
+            else{
+                $this->session->set_userdata('step', 0);
+                $data['step'] = 0;
+                $data['title'] = 'Gallery';
+                if(isset($this->session->username) && $this->session->username != null){
+                    $data['user'] = true;
+                }
+                else {
+                    $data['user'] = false;
+                }
+                $this->load->view('Gallery/main', $data);
+            }
         }
         else{
-            $this->gallery->do_upload();
-            $this->upload_model->set_album();
-            $this->upload_model->set_banner();
-        }
-    }
-    
-    public function do_upload(){
-        $config['upload_path']          = './assets/uploads/';
-        $config['allowed_types']        = 'gif|jpg|png|jpeg';
-        $config['max_size']             = 1000;
-        $config['max_width']            = 1024;
-        $config['max_height']           = 768;
-        $this->load->library('upload', $config);
-        if ( ! $this->upload->do_upload('banner')){
-            $error = array('error' => $this->upload->display_errors());
-            $this->load->view('gallery/upload', $error);
-        }
-        else{
-            $data = array('upload_data' => $this->upload->data());
-            $this->load->view('dashboard/success', $data);
-        }
+            // This means it is same as index() and we will initiate a session
+            $this->session->set_userdata('step', 0);
+            $data['step'] = 0;
+            $data['title'] = 'Gallery';
+            if(isset($this->session->username) && $this->session->username != null){
+                $data['user'] = true;
+            }
+            else {
+                $data['user'] = false;
+            }
+            if(isset($this->session->username) && $this->session->username != null){
+                $data['user'] = true;
+            }
+            else {
+                $data['user'] = false;
+            }           
+            $this->load->view('Gallery/upload', $data);
+        }    
     }
 }

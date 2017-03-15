@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class User_model extends CI_Model {
+class Upload_model extends CI_Model {
 
 	/**
 	 * Index Page for this controller.
@@ -22,24 +22,25 @@ class User_model extends CI_Model {
         $this->load->database();
     }
     
-    public function get_user($slug = FALSE){
+    public function get_album($slug = FALSE){
         if(isset($slug) && $slug != null){
             $query = $this->db->get_where('users', array('username' => $slug));
             return $query->row_array();
         }
     }
     
-    public function set_album()
-    {
-        $this->load->helper('url');
-        $name = trim($this->input->post('name'));
+    public function set_album(){
+
+        $name = trim($this->input->post('title'));
         $detail = trim($this->input->post('detail'));
         $data = array(
             'name' => $name,
-            'detail' => $detail
+            'detail' => $detail,
+            'banner_img' => $this->session->img
         );
-
-        return $this->db->insert('users', $data);
+        $session_data = array('img', 'step');
+        $this->session->unset_userdata($session_data);
+        return $this->db->insert('album', $data);
     }
     
 }

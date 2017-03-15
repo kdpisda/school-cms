@@ -57,7 +57,7 @@
       <nav class="mdl-navigation">
           <?php if(isset($user) && $user != false){ ?>
         <a class="mdl-navigation__link" href="<?php echo base_url(); ?>dashboard"><i class="material-icons">&#xE871;</i> Dashbooard</a>
-        <a class="mdl-navigation__link" href="<?php echo base_url(); ?>upload"><i class="material-icons">&#xE2C6;</i> Upload</a>
+        <a class="mdl-navigation__link" href="<?php echo base_url(); ?>gallery/upload"><i class="material-icons">&#xE2C6;</i> Upload</a>
         <a class="mdl-navigation__link" href=""><i class="material-icons">&#xE8AF;</i> FAQ</a>
         <a class="mdl-navigation__link" href="<?php echo base_url(); ?>dashboard/logout"><i class="material-icons">&#xE154;</i> Logout</a>
             <?php }else {?>
@@ -85,104 +85,44 @@
   <main class="mdl-layout__content">
     <div class="page-content">
       <div class="mdl-grid">
+            <?php $count = 0; foreach($album as $album_item): 
+                if($count == 0 or $count %3 == 0){
+                    ?>
         <div class="mdl-cell mdl-cell--2-offset-desktop mdl-cell--3-col-desktop">
-          <div class="demo-card-square mdl-card mdl-shadow--2dp">
-                <div class="mdl-card__title mdl-card--expand" style="background: url('https://s-media-cache-ak0.pinimg.com/avatars/shalupisda_1471721118_280.jpg') center / cover;">
-                    <h2 class="mdl-card__title-text">Update</h2>
+            <div class="demo-card-square mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title mdl-card--expand" style="background: url('<?php echo base_url().'assets/uploads/'.$album_item['banner_img']; ?>') center / cover;">
+                    <h2 class="mdl-card__title-text"><?php echo $album_item['name']; ?></h2>
                 </div>
                 <div class="mdl-card__supporting-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Aenan convallis.
+                    <?php echo $album_item['detail']; ?>
                 </div>
                 <div class="mdl-card__actions mdl-card--border">
                     <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
                     View Updates
                     </a>
                 </div>
-          </div>
+            </div>
         </div>
+            <?php
+                } else{ ?>
         <div class="mdl-cell mdl-cell--3-col-desktop">
-          <div class="demo-card-square mdl-card mdl-shadow--2dp">
-                <div class="mdl-card__title mdl-card--expand" style="background: url('https://s-media-cache-ak0.pinimg.com/avatars/shalupisda_1471721118_280.jpg') center / cover;">
-                    <h2 class="mdl-card__title-text">Update</h2>
+            <div class="demo-card-square mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title mdl-card--expand" style="background: url('<?php echo base_url().'assets/uploads/'.$album_item['banner_img']; ?>') center / cover;">
+                    <h2 class="mdl-card__title-text"><?php echo $album_item['name']; ?></h2>
                 </div>
                 <div class="mdl-card__supporting-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Aenan convallis.
+                    <?php echo $album_item['detail']; ?>
                 </div>
                 <div class="mdl-card__actions mdl-card--border">
                     <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
                     View Updates
                     </a>
                 </div>
-          </div>
+            </div>
         </div>
-        <div class="mdl-cell mdl-cell--3-col-desktop">
-          <div class="demo-card-square mdl-card mdl-shadow--2dp">
-                <div class="mdl-card__title mdl-card--expand" style="background: url('https://s-media-cache-ak0.pinimg.com/avatars/shalupisda_1471721118_280.jpg') center / cover;">
-                    <h2 class="mdl-card__title-text">Update</h2>
-                </div>
-                <div class="mdl-card__supporting-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Aenan convallis.
-                </div>
-                <div class="mdl-card__actions mdl-card--border">
-                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                    View Updates
-                    </a>
-                </div>
-          </div>
-        </div>
-      </div>
-      <div class="mdl-grid">
-        <div class="mdl-cell mdl-cell--2-offset-desktop mdl-cell--3-col-desktop">
-          <div class="demo-card-square mdl-card mdl-shadow--2dp">
-                <div class="mdl-card__title mdl-card--expand" style="background: url('https://s-media-cache-ak0.pinimg.com/avatars/shalupisda_1471721118_280.jpg') center / cover;">
-                    <h2 class="mdl-card__title-text">Update</h2>
-                </div>
-                <div class="mdl-card__supporting-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Aenan convallis.
-                </div>
-                <div class="mdl-card__actions mdl-card--border">
-                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                    View Updates
-                    </a>
-                </div>
-          </div>
-        </div>
-        <div class="mdl-cell mdl-cell--3-col-desktop">
-          <div class="demo-card-square mdl-card mdl-shadow--2dp">
-                <div class="mdl-card__title mdl-card--expand" style="background: url('https://s-media-cache-ak0.pinimg.com/avatars/shalupisda_1471721118_280.jpg') center / cover;">
-                    <h2 class="mdl-card__title-text">Update</h2>
-                </div>
-                <div class="mdl-card__supporting-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Aenan convallis.
-                </div>
-                <div class="mdl-card__actions mdl-card--border">
-                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                    View Updates
-                    </a>
-                </div>
-          </div>
-        </div>
-        <div class="mdl-cell mdl-cell--3-col-desktop">
-          <div class="demo-card-square mdl-card mdl-shadow--2dp">
-                <div class="mdl-card__title mdl-card--expand" style="background: url('https://s-media-cache-ak0.pinimg.com/avatars/shalupisda_1471721118_280.jpg') center / cover;">
-                    <h2 class="mdl-card__title-text">Update</h2>
-                </div>
-                <div class="mdl-card__supporting-text">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Aenan convallis.
-                </div>
-                <div class="mdl-card__actions mdl-card--border">
-                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                    View Updates
-                    </a>
-                </div>
-          </div>
-        </div>
+            <?php }
+        $count++;        
+            endforeach; ?>
       </div>
     <footer class="mdl-mega-footer">
   <div class="mdl-mega-footer__middle-section">
